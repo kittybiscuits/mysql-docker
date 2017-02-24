@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  mysql:
+    build:
+      context: ./init
+      dockerfile: Dockerfile
+    expose:
+      - 3306
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - "${HOME}/docker-data/mysql:/var/lib/mysql"
+
+    hostname: db
+    domainname: example.com
+
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+#      - MYSQL_ROOT_PASSWORD=admin_password
+#      - MYSQL_USER=user_username
+#      - MYSQL_PASSWORD=user_password
+#      - MYSQL_DATABASE=dbname
+
+    restart: unless-stopped
+    privileged: false
+    stdin_open: false
+    tty: false
+
